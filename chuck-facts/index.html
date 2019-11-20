@@ -1,0 +1,53 @@
+<!-- Alan Daniel - CS4220 Please put app.js in a companion js file -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chuck Norris Facts</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chuck" v-cloak>
+        
+        <h1>{{appName}}</h1>
+        <p> Get a random joke from the category (Please click on the dropdown once for the list to generate)
+            <select v-on:click="getCategory" v-model="selected">
+                <option>Any</option>
+                <option v-for="category in categories"> {{category}} </option>
+            </select> 
+        <button v-on:click="getJoke">Get this type of joke!</button>
+    </br> - or - </br>
+        <input type='text' v-model="search" placeholder='Search jokes'/> 
+        <button v-on:click="getSearch"> Search 
+        </button>
+        <p></br>**** Your Search Results ****</p>
+        <p v-show="isFetchingAJoke">Fetching...</p>
+        <h3 v-show="!isFetchingAJoke" v-for="result in searchResults">{{result}}</h3>
+        <p>**** Your randomly selected joke from your selected category ****</p>
+        <p v-show="isFetchingAJoke">Fetching...</p>
+        <h3 v-show="!isFetchingAJoke">{{currentJoke}}</h3>
+
+        <p v-if="previousJokes.length">Previous Jokes</p>
+        <ol>
+            <li v-for="joke in previousJokes">{{joke}}</li>
+        </ol>
+        <p>**** Your Search History ****</p>
+        <ol>
+            <li v-for="his in history">{{his}}</li>
+        </ol>
+    </div>
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+</body>
+
+</html>
